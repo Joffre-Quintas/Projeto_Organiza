@@ -1,3 +1,4 @@
+import Layout from '@/components/layout'
 import { Html, Head, Main, NextScript } from 'next/document'
 import {} from 'tailwindcss'
 export default function Document() {
@@ -5,8 +6,10 @@ export default function Document() {
     <Html lang="pt-br">
       <Head />
       <body>
-        <Main />
-        <NextScript />
+        <Layout>
+          <Main />
+          <NextScript />
+        </Layout>
       </body>
     </Html>
   )
