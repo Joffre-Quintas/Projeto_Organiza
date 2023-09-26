@@ -1,15 +1,12 @@
-import Layout from '@/components/layout'
-import { Html, Head, Main, NextScript } from 'next/document'
-import {} from 'tailwindcss'
+import { Html, Head, Main, NextScript } from 'next/document';
+
 export default function Document() {
   return (
     <Html lang="pt-br">
       <Head />
       <body>
-        <Layout>
-          <Main />
-          <NextScript />
-        </Layout>
+            <Main />
+            <NextScript />
       </body>
     </Html>
   )
