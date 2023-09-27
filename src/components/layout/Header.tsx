@@ -12,11 +12,11 @@ export default function Header() {
 
     return (
         <>
-            <header className="fixed w-full h-16 top-0 left-0 grid grid-cols-3 px-8 py-4 bg-neutral-900 z-10 cursor-pointer">
-                <div className='flex justify-start items-center text-xl text-lime-500 transition hover:opacity-90'>
+            <header className="fixed w-full h-16 top-0 left-0 grid grid-cols-2 px-8 py-4 bg-neutral-900 z-10 cursor-pointer md:grid-cols-3">
+                <div className='hidden justify-start items-center text-xl text-lime-500 transition hover:opacity-90 md:flex'>
                     <AiOutlineMenu onClick={toggleState}/>
                 </div>
-                <div className="flex justify-center items-center">LOGO</div>
+                <div className="flex justify-start items-center md:ml-16 md:justify-center" >LOGO</div>
                 {!user ?
                     <div className="flex justify-end gap-2 items-center">    
                         <Link href='/login' className='transition hover:scale-110 hover:text-lime-500'>Login</Link>
@@ -25,7 +25,7 @@ export default function Header() {
                     </div>
                     :
                     <div className="flex justify-end gap-2 items-center text-sm cursor-pointer">
-                        {<p>{user.nome_social}</p>}
+                        {<p>{user.usuario.nome_social}</p>}
                         <div className='text-xl'>
                             <FaRegCircleUser/>
                         </div>

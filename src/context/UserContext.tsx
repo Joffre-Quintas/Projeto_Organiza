@@ -1,10 +1,13 @@
 import { createContext, useEffect, useState } from "react";
 
 interface IUser {
-    id:number,
-    nome_complet: string,
-    nome_social: string,
-    email: string
+    token: string,
+    usuario: {
+        id:number,
+        nome_complet: string,
+        nome_social: string,
+        email: string
+    }
 }
 interface IUserContext {
     user?:IUser,
