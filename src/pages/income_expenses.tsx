@@ -161,7 +161,7 @@ export default function Income_expenses() {
                 <button className="w-full bg-lime-500 px-4 py-2 text-white rounded-md hover:opacity-90 cursor-pointer md:h-10 md:self-end" onClick={e => handleRegisterBill(e)}>Cadastrar</button>
             </fieldset>
             <>
-                {billList.length !== 0 ? <Table header={header} content={billList} setBillList={setBillList}/> : <div className="flex flex-col gap-8 mt-16 text-4xl items-center scale-150"><FaSadTear/><p>Não finanças cadastras!</p></div>}
+                {billList.length !== 0 ? <Table header={header} content={billList} setBillList={setBillList}/> : <div className="flex flex-col gap-8 mt-16 text-4xl items-center scale-150"><FaSadTear/><p>Não há finanças cadastras!</p></div>}
             </>
         </div>
     )
