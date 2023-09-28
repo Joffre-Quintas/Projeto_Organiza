@@ -1,22 +1,11 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react"
+import Table from "@/components/Table"
+import { IBill } from "@/types/TypeBill"
+import { ISubtipo } from "@/types/TypeSubtipo"
+import { ITipo } from "@/types/TypeTipo"
+import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react"
 
-interface ITipo {
-    id: number,
-    tipo: string
-}
-interface IBill {
-    data: Date | null,
-    tipo: string | null,
-    subtipo: string | null,
-    valor: number | null,
-    descricao: string | null
-}
-interface ISubtipo {
-    id:number,
-    subtipo: string,
-    tipo: string
-}
 export default function Income_expenses() {
+    const header = ["Data","Descrição", "Tipo", "Subtipo", "Valor"]
 
     const [categories, setCategories] = useState({tipo:[], subtipo:[]})
     const [bill, setBill] = useState<IBill>({
@@ -26,6 +15,28 @@ export default function Income_expenses() {
         valor: null,
         descricao: null
     })
+    const [billList, setBillList] = useState<IBill[]>([]) 
+
+    useEffect(useCallback(() => {
+        async function handleGetBillList() {
+            try {
+                const { token } = JSON.parse(localStorage.getItem('userOrganiza') as string);
+                const listData = await fetch('https://defiant-seal-wetsuit.cyclic.app/listafinancas', {
+                    method: 'GET',
+                    headers: {
+                        "Content-type":"application/json",
+                        "Authorization": `Bearer ${token}`,
+                    },
+                })
+                const lista = await listData.json()
+                setBillList(lista)
+            } catch (error) {
+                console.log(error)
+                //NOTIFICACAO
+            }
+        }
+        handleGetBillList()
+    },[]),[billList])
 
     useEffect(()=> {
         async function handleGetCategories() {
@@ -45,9 +56,9 @@ export default function Income_expenses() {
             }
         })
     }
+
     async function handleRegisterBill(e:FormEvent) {
         e.preventDefault()
-        console.log(bill)
 
         if(Object.values(bill).some(value => value === null)){
             console.error('Preencha todos os campos!')
@@ -62,7 +73,7 @@ export default function Income_expenses() {
                     },
                     body: JSON.stringify(bill)
                 })
-                if(status.ok) {
+                if(status.status === 201) {
                     setBill({
                         data: null,
                         tipo: null,
@@ -70,18 +81,19 @@ export default function Income_expenses() {
                         valor: null,
                         descricao: null
                     })
-                    // NOTIFICACAO
+                    
                 }
             } catch (err) {
                 console.log(err)
+                // NOTIFICACAO
             }
         }
     }
 
     return(
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col gap-8 items-center">
             <h1 className="text-2xl mt-8 mb-4 md:text-4xl">Receitas e Despesas</h1>
-            <fieldset className="flex flex-col gap-4 border border-lime-600 p-4 rounded-md w-3/4 min-w-[300px] max-w-fit text-lime-500 text-sm lg:flex-row">
+            <fieldset className="flex flex-col gap-4 border border-lime-600 p-4 rounded-md w-3/4 min-w-[300px] text-lime-500 text-sm lg:flex-row">
                 <legend className="text-lime-600 italic">Cadastro de Entrada / Saída</legend>
                 <div className="flex flex-col gap-2 w-full">
                     <label htmlFor="data">Data da Efetuação</label>    
@@ -114,7 +126,7 @@ export default function Income_expenses() {
                         })}
                     </select>
                 </div>
-                <div className="flex flex-col gap-2 w-full">
+                <div className="flex flex-col gap-2 w-full lg:w-[100px] xl:w-fit">
                     <label htmlFor="subtipo">Subtipo</label>    
                     <select 
                         name="subtipo" 
@@ -130,12 +142,14 @@ export default function Income_expenses() {
                     <input 
                         type="text" 
                         name="valor" 
-                        className="w-full px-4 py-2 rounded-md outline-none text-black text-center"
+                        className="w-full px-4 py-2 rounded-md outline-none text-black text-center min-w-[80px]"
                         onChange={e => handleSetBill(e)}
                     />
                 </div>
                 <button className="w-full bg-lime-500 px-4 py-2 text-white rounded-md hover:opacity-90 cursor-pointer md:h-10 md:self-end" onClick={e => handleRegisterBill(e)}>Cadastrar</button>
             </fieldset>
+
+            <Table header={header} content={billList}/>
         </div>
     )
 }
