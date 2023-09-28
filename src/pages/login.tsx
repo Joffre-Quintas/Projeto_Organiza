@@ -31,12 +31,12 @@ export default function Login(){
                 },
                 body: JSON.stringify(loginData)
             })
-            if(data.ok && data !== null) {
-                handleLogin('login', await data.json())
-                router.push('/')
-            } else {
-                throw new Error('Usuário não encontrado!')
-            }
+                if(data.ok && data !== null) {
+                    handleLogin('login', await data.json())
+                    router.push('/')
+                } else {
+                    throw new Error('Usuário não encontrado!')
+                }
             }
             catch(err) {
                 console.log(err)
