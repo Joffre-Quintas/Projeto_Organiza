@@ -4,6 +4,8 @@ import { ISubtipo } from "@/types/TypeSubtipo"
 import { ITipo } from "@/types/TypeTipo"
 import { ChangeEvent, FormEvent, useEffect, useState } from "react"
 
+import { FaSadTear } from 'react-icons/fa'
+
 export default function Income_expenses() {
     const header = ["Data","Descrição", "Tipo", "Subtipo", "Valor"]
 
@@ -40,9 +42,14 @@ export default function Income_expenses() {
 
     useEffect(()=> {
         async function handleGetCategories() {
-            const data = await fetch('https://defiant-seal-wetsuit.cyclic.app/listagemparametrostabela')
+            try {
+                const data = await fetch('https://defiant-seal-wetsuit.cyclic.app/listagemparametrostabela')
             const dataCategories = await data.json()
             setCategories(dataCategories)
+            } catch (error) {
+                console.log(error)
+            }
+            
         }   
         handleGetCategories()
     },[])
@@ -120,7 +127,7 @@ export default function Income_expenses() {
                     </div>
                 <div className="flex flex-col gap-2 w-full">
                     <label htmlFor="tipo">Tipo</label>    
-                    <select 
+                    <select
                         name="tipo" 
                         className="px-4 py-2 rounded-md outline-none text-black text-center"
                         onChange={e => handleSetBill(e)}
@@ -133,7 +140,7 @@ export default function Income_expenses() {
                 </div>
                 <div className="flex flex-col gap-2 w-full lg:w-[100px] xl:w-fit">
                     <label htmlFor="subtipo">Subtipo</label>    
-                    <select 
+                    <select
                         name="subtipo" 
                         className="px-4 py-2 rounded-md outline-none text-black text-center"
                         onChange={e => handleSetBill(e)}    
@@ -153,8 +160,9 @@ export default function Income_expenses() {
                 </div>
                 <button className="w-full bg-lime-500 px-4 py-2 text-white rounded-md hover:opacity-90 cursor-pointer md:h-10 md:self-end" onClick={e => handleRegisterBill(e)}>Cadastrar</button>
             </fieldset>
-
-            {billList.length !== 0 && <Table header={header} content={billList} setBillList={setBillList}/>}
+            <>
+                {billList.length !== 0 ? <Table header={header} content={billList} setBillList={setBillList}/> : <div className="flex flex-col gap-8 mt-16 text-4xl items-center scale-150"><FaSadTear/><p>Não finanças cadastras!</p></div>}
+            </>
         </div>
     )
 }

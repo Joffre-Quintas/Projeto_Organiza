@@ -40,7 +40,7 @@ export default function Table({ header, content, setBillList}:{header:string[], 
                 {content.map((row:IBill) => {
                     return row.tipo !== 'Investimento' && 
                     <tr key={row.id} className='text-center' data-id={row.id}>
-                        <td className="p-2 hidden sm:block">{row.data as any}</td>
+                        <td className="p-2 hidden sm:block">{row.data}</td>
                         <td className="p-2 overflow-x-hidden">{treatmentString(row.descricao as string)}</td>
                         <td className="p-2">{treatmentString(row.tipo as string)}</td>
                         <td className="p-2">{treatmentString(row.subtipo as string)}</td>
