@@ -2,7 +2,7 @@ import Table from "@/components/Table"
 import { IBill } from "@/types/TypeBill"
 import { ISubtipo } from "@/types/TypeSubtipo"
 import { ITipo } from "@/types/TypeTipo"
-import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react"
+import { ChangeEvent, FormEvent, useEffect, useState } from "react"
 
 export default function Income_expenses() {
     const header = ["Data","Descrição", "Tipo", "Subtipo", "Valor"]
@@ -17,7 +17,7 @@ export default function Income_expenses() {
     })
     const [billList, setBillList] = useState<IBill[]>([]) 
 
-    useEffect(useCallback(() => {
+    useEffect(() => {
         async function handleGetBillList() {
             try {
                 const { token } = JSON.parse(localStorage.getItem('userOrganiza') as string);
@@ -36,7 +36,7 @@ export default function Income_expenses() {
             }
         }
         handleGetBillList()
-    },[]),[billList])
+    },[])
 
     useEffect(()=> {
         async function handleGetCategories() {
@@ -81,7 +81,12 @@ export default function Income_expenses() {
                         valor: null,
                         descricao: null
                     })
-                    
+                    setBillList(current => {
+                        return [
+                            ...current,
+                            bill
+                        ]
+                    })
                 }
             } catch (err) {
                 console.log(err)
@@ -149,7 +154,7 @@ export default function Income_expenses() {
                 <button className="w-full bg-lime-500 px-4 py-2 text-white rounded-md hover:opacity-90 cursor-pointer md:h-10 md:self-end" onClick={e => handleRegisterBill(e)}>Cadastrar</button>
             </fieldset>
 
-            <Table header={header} content={billList}/>
+            {billList.length !== 0 && <Table header={header} content={billList} setBillList={setBillList}/>}
         </div>
     )
 }
