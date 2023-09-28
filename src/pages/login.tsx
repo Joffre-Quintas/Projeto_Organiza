@@ -20,7 +20,7 @@ export default function Login(){
 
     async function handleSubmit(e:FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        if(Object.values(loginData).some(value => value === null)) {
+        if(Object.values(loginData).some((value:string) => value.trim() === null)) {
             console.log('Preencha todos os campos!')
         } else {
             try {

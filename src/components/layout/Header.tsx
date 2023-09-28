@@ -21,7 +21,7 @@ export default function Header() {
                     <div className="flex justify-end gap-2 items-center">    
                         <Link href='/login' className='transition hover:scale-110 hover:text-lime-500'>Login</Link>
                         <span className="text-lime-500 text-2xl">/</span>
-                        <Link href='/cadastro' className='transition hover:scale-110 hover:text-lime-500'>Cadastre-se</Link>
+                        <Link href='/register' className='transition hover:scale-110 hover:text-lime-500'>Cadastre-se</Link>
                     </div>
                     :
                     <div className="flex justify-end gap-2 items-center text-sm cursor-pointer">
