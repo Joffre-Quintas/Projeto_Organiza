@@ -1,0 +1,1 @@
+export const urlBaseAPI = 'https://gerenciador-financas.onrender.com'

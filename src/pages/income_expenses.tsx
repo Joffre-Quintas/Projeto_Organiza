@@ -1,4 +1,5 @@
 import Table from "@/components/Table"
+import { urlBaseAPI } from "@/data/urlapi"
 import { IBill } from "@/types/TypeBill"
 import { ISubtipo } from "@/types/TypeSubtipo"
 import { ITipo } from "@/types/TypeTipo"
@@ -23,7 +24,7 @@ export default function Income_expenses() {
         async function handleGetBillList() {
             try {
                 const { token } = JSON.parse(localStorage.getItem('userOrganiza') as string);
-                const listData = await fetch('https://defiant-seal-wetsuit.cyclic.app/listafinancas', {
+                const listData = await fetch(`${urlBaseAPI}/listafinancas`, {
                     method: 'GET',
                     headers: {
                         "Content-type":"application/json",
@@ -43,7 +44,7 @@ export default function Income_expenses() {
     useEffect(()=> {
         async function handleGetCategories() {
             try {
-                const data = await fetch('https://defiant-seal-wetsuit.cyclic.app/listagemparametrostabela')
+                const data = await fetch(`${urlBaseAPI}/listagemparametrostabela`)
             const dataCategories = await data.json()
             setCategories(dataCategories)
             } catch (error) {
@@ -72,7 +73,7 @@ export default function Income_expenses() {
         } else {
             try {
                 const { token } = JSON.parse(localStorage.getItem('userOrganiza') as string);
-                const status = await fetch('https://defiant-seal-wetsuit.cyclic.app/cadastrofinanceiro', {
+                const status = await fetch(`${urlBaseAPI}/cadastrofinanceiro`, {
                     method: 'POST',
                     headers: {
                         "Content-type":"application/json",
@@ -118,7 +119,7 @@ export default function Income_expenses() {
                 </div>
                 <div className="flex flex-col gap-2 w-full text">
                     <label htmlFor="descricao">Descrição</label> 
-                        <input 
+                        <input
                             type="text" 
                             name="descricao" 
                             className="w-full px-4 py-2 rounded-md outline-none text-black text-center"
@@ -132,7 +133,7 @@ export default function Income_expenses() {
                         className="px-4 py-2 rounded-md outline-none text-black text-center"
                         onChange={e => handleSetBill(e)}
                     >
-                        <option value="-">-</option>
+                        <option>-</option>
                         {categories && categories.tipo.map((tipo:ITipo) => {
                             return tipo.tipo !== 'Investimento' ? <option key={tipo.id}>{tipo.tipo}</option> : null
                         })}
@@ -145,7 +146,7 @@ export default function Income_expenses() {
                         className="px-4 py-2 rounded-md outline-none text-black text-center"
                         onChange={e => handleSetBill(e)}    
                     >
-                        <option value="-">-</option>
+                        <option>-</option>
                         {bill && categories.subtipo.filter((sub:ISubtipo) => sub.tipo === bill.tipo).map((filtered:ISubtipo) => <option key={filtered.id}>{filtered.subtipo}</option>)}
                     </select>
                 </div>

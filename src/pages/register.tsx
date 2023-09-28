@@ -1,7 +1,8 @@
 import Form from "@/components/Form";
+import { urlBaseAPI } from "@/data/urlapi";
 
 export default function Register() {
-    const endpoint = 'https://defiant-seal-wetsuit.cyclic.app/cadastrar'
+    const endpoint = `${urlBaseAPI}/cadastrar`
 
     return (
         <div className="flex flex-col items-center">

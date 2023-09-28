@@ -21,7 +21,7 @@ const menuItens = [
     {
         "icon": TbReportMoney,
         "name": "Relatório",
-        "url": "./"
+        "url": "./report"
     },
     {
         "icon": BsGear,

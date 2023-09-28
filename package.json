@@ -12,6 +12,7 @@
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "react-google-charts": "^4.0.1",
     "react-icons": "^4.11.0"
   },
   "devDependencies": {

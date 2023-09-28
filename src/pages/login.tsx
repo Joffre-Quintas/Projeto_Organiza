@@ -1,4 +1,5 @@
 import { UserContext } from "@/context/UserContext"
+import { urlBaseAPI } from "@/data/urlapi";
 import router from "next/router";
 import { ChangeEvent, FormEvent, useContext, useState } from "react"
 
@@ -24,7 +25,7 @@ export default function Login(){
             console.log('Preencha todos os campos!')
         } else {
             try {
-                const data = await fetch('https://defiant-seal-wetsuit.cyclic.app/login', {
+                const data = await fetch(`${urlBaseAPI}/login`, {
                 method: 'POST',
                 headers: {
                     "Content-type":"application/json"

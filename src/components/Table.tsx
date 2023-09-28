@@ -3,13 +3,14 @@ import { BsFillPencilFill, BsFillTrash3Fill } from 'react-icons/bs'
 import { Dispatch, SetStateAction } from "react";
 
 import treatmentString from "./utils/treatmentString";
+import { urlBaseAPI } from "@/data/urlapi";
 
 export default function Table({ header, content, setBillList}:{header:string[], content:IBill[], setBillList: Dispatch<SetStateAction<IBill[]>>}) {
 
     async function handleDeleteBill(id:number) {
         try {
             const { token } = JSON.parse(localStorage.getItem('userOrganiza') as string)
-            const data = await fetch('https://defiant-seal-wetsuit.cyclic.app/excluirfinanceiro', {
+            const data = await fetch(`${urlBaseAPI}/excluirfinanceiro`, {
                 method:'DELETE',
                 headers: {
                     "Content-type":"application/json",
