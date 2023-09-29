@@ -33,8 +33,7 @@ export default function Income_expenses() {
             const lista = await listData.json()
             setBillList(lista)
         } catch (error) {
-            console.log(error)
-            //NOTIFICACAO
+            alert(error)
         }
     }
     
@@ -49,7 +48,7 @@ export default function Income_expenses() {
             const dataCategories = await data.json()
             setCategories(dataCategories)
             } catch (error) {
-                console.log(error)
+                alert(error)
             }       
         }
         handleGetCategories()
@@ -101,9 +100,8 @@ export default function Income_expenses() {
                     //     ]
                     // })
                 }
-            } catch (err) {
-                console.log(err)
-                // NOTIFICACAO
+            } catch (error) {
+                alert(error)
             }
         }
     }

@@ -24,8 +24,7 @@ export default function Table({ header, content, setBillList}:{header:string[], 
                 })
             }
         } catch (error) {
-            console.log(error)
-            //NOTIFICACAO
+            alert(error)
         }
     }
 

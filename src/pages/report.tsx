@@ -64,7 +64,7 @@ export default function Report() {
             })
             setFilteredList(await data.json())
         } catch (error) {
-            console.log(error)
+            alert(error)
         }
     },[filterReport])
 

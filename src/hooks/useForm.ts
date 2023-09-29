@@ -25,7 +25,7 @@ export default function useForm() {
         const {e, endpoint, method} = props;
         e.preventDefault()
         if(Object.values(formData).some((value => value === null))) {
-            console.log("Preencha todos os campos!")
+            alert("Preencha todos os campos!")
         } else if(method === 'POST') {
             try {
                 const status = await fetch(endpoint, {

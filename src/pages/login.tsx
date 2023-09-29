@@ -22,7 +22,7 @@ export default function Login(){
     async function handleSubmit(e:FormEvent<HTMLFormElement>) {
         e.preventDefault()
         if(Object.values(loginData).some((value:string) => value.trim() === null)) {
-            console.log('Preencha todos os campos!')
+            alert('Preencha todos os campos!')
         } else {
             try {
                 const data = await fetch(`${urlBaseAPI}/login`, {
@@ -40,7 +40,7 @@ export default function Login(){
                 }
             }
             catch(err) {
-                console.log(err)
+                alert(err)
             }
         }
     }
