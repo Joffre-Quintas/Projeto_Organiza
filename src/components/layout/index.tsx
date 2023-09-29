@@ -11,7 +11,7 @@ export default function Layout(props: any) {
         window.addEventListener('resize', () => {
             setwindowSize(window.innerWidth)
         })
-        windowSize <= 768 && close()
+        windowSize <= 768 && close && close()
     },[windowSize])
 
 

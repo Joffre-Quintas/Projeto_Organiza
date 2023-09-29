@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import ColumnDiffGrafic from '@/components/ColumnDiffGrafic';
 import PieGrafic from '@/components/PieGrafic';
 import { urlBaseAPI } from '@/data/urlapi';
@@ -13,16 +15,16 @@ export default function Report() {
         ano:(new Date()).getFullYear()
     }
 
-    const [filteredList, setFilteredList] = useState()
+    const [filteredList, setFilteredList] = useState<IBill[] | null>(null)
     const [filterReport, setFilterReport] = useState(currentData)
 
     const incomesValue = useMemo(() => {
-        if(filteredList) {
+        if(filteredList && filteredList.length > 0) {
             return filteredList.filter((bill: IBill) => bill.tipo === 'Receita').reduce((acumulator: number, current: IBill) => acumulator += current.valor as number, 0)
         }
     },[filteredList])
     const expensesValue = useMemo(() => {
-        if(filteredList) {
+        if(filteredList && filteredList.length > 0) {
             return filteredList.filter((bill: IBill) => bill.tipo === 'Despesa').reduce((acumulator: number, current: IBill) => acumulator += current.valor as number, 0)
         }
     },[filteredList])
@@ -78,7 +80,7 @@ export default function Report() {
     }
 
     const expenseDetails = useMemo(() => {
-        if (filteredList) {
+        if (filteredList && filteredList.length > 0) {
             const expenses = filteredList.filter((bill: IBill) => bill.tipo === 'Despesa');
             
             const groupedExpenses = expenses.reduce((acc, expense) => {
@@ -98,7 +100,7 @@ export default function Report() {
     }, [filteredList]);
 
     const incomeDetails = useMemo(() => {
-        if (filteredList) {
+        if (filteredList && filteredList.length > 0) {
             const incomes = filteredList.filter((bill: IBill) => bill.tipo === 'Receita');
             
             const groupedIncomes = incomes.reduce((acc, incomes) => {

@@ -33,7 +33,7 @@ export default function Login(){
                 body: JSON.stringify(loginData)
             })
                 if(data.ok && data !== null) {
-                    handleLogin('login', await data.json())
+                    handleLogin?.('login', await data.json())
                     router.push('/')
                 } else {
                     throw new Error('Usuário não encontrado!')

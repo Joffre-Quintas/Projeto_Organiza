@@ -10,7 +10,7 @@ interface IUser {
     }
 }
 interface IUserContext {
-    user?:IUser,
+    user?:IUser | null,
     handleLogin?: (type: 'login' | 'logout', user: IUser) => void
 }
 export const UserContext = createContext<IUserContext>(null!)

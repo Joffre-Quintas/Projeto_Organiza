@@ -4,6 +4,7 @@ import loginLogout from "@/data/loginLogout";
 import { useContext } from "react";
 import { UserContext } from "@/context/UserContext";
 import router from "next/router";
+import _default from "next/dist/client/router";
 
 
 
@@ -23,7 +24,7 @@ export default function Navbar() {
                 }
                 
                 {user ?
-                    <div onClick={() => handleLogin('logout')}>
+                    <div onClick={() => handleLogin?.('logout', user)}>
                         <NavbarItem item={loginLogout[0]}/>
                     </div>
                     :
