@@ -24,8 +24,8 @@ export default function Header() {
                         <Link href='/register' className='transition hover:scale-110 hover:text-lime-500'>Cadastre-se</Link>
                     </div>
                     :
-                    <div className="flex justify-end gap-2 items-center text-sm cursor-pointer">
-                        {<p>{user.usuario.nome_social}</p>}
+                    <div className="flex justify-end gap-2 items-center text-sm text-lime-500">
+                        {<p >{user.usuario.nome_social}</p>}
                         <div className='text-xl'>
                             <FaRegCircleUser/>
                         </div>
