@@ -19,7 +19,7 @@ export default function Layout(props: any) {
         <div>
             <Header/>
             <Navbar/>
-            <div className={`${!isOpen ? 'ml-16': 'ml-56' } mt-16`}>
+            <div className={/*`${!isOpen ? 'ml-16': 'ml-56'}*/ 'ml-16 mt-16' /*`*/}>
                 {props.children}  
             </div>
         </div>

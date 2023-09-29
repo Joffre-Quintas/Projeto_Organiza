@@ -11,7 +11,7 @@ export default function Navbar() {
     const { user ,handleLogin } = useContext(UserContext)
     return(
         <>
-            <nav className="fixed w-fit h-full top-0 flex flex-col justify-between bg-neutral-800 shadow-md shadow-gray-800">
+            <nav className="fixed w-fit h-full top-0 flex flex-col justify-between bg-neutral-800 shadow-md shadow-gray-800 z-10">
                 {user ? 
                     <ul className="flex flex-col mt-16">
                         {menuItens.map((item,index) => <NavbarItem key={index} item={item}/>)}

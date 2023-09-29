@@ -12,8 +12,8 @@ export default function Header() {
 
     return (
         <>
-            <header className="fixed w-full h-16 top-0 left-0 grid grid-cols-2 px-8 py-4 bg-neutral-900 z-10 cursor-pointer md:grid-cols-3">
-                <div className='hidden justify-start items-center text-xl text-lime-500 transition hover:opacity-90 md:flex'>
+            <header className="fixed w-full h-16 top-0 left-0 grid grid-cols-2 px-4 py-4 bg-neutral-900 z-20 cursor-pointer md:grid-cols-3">
+                <div className='hidden justify-start items-center text-xl text-lime-500 transition hover:opacity-90 ml-1 md:flex'>
                     <AiOutlineMenu onClick={toggleState}/>
                 </div>
                 <div className="flex justify-start items-center md:ml-16 md:justify-center" >LOGO</div>

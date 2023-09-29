@@ -25,7 +25,7 @@ export default function Income_expenses() {
             try {
                 const { token } = JSON.parse(localStorage.getItem('userOrganiza') as string);
                 const listData = await fetch(`${urlBaseAPI}/listafinancas`, {
-                    method: 'GET',
+                    method: 'POST',
                     headers: {
                         "Content-type":"application/json",
                         "Authorization": `Bearer ${token}`,
@@ -59,8 +59,8 @@ export default function Income_expenses() {
         const { name, value } = e.target
         setBill(current => {
             return {
-                ...current,
-                [name]: typeof Number(value) === 'number' ? value.replace(',','.'): value
+                [name]: typeof Number(value) === 'number' ? value.replace(',','.'): value,
+                ...current
             }
         })
     }
