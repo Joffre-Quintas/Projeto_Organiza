@@ -45,8 +45,8 @@ export default function useForm() {
                     router.push('./')
                 }
             }
-            catch(err) {
-                console.error(err)
+            catch(error) {
+                alert(error)
             }
         }
     }
