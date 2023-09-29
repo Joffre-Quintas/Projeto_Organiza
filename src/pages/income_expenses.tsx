@@ -20,27 +20,28 @@ export default function Income_expenses() {
     })
     const [billList, setBillList] = useState<IBill[]>([]) 
 
-    useEffect(() => {
-        async function handleGetBillList() {
-            try {
-                const { token } = JSON.parse(localStorage.getItem('userOrganiza') as string);
-                const listData = await fetch(`${urlBaseAPI}/listafinancas`, {
-                    method: 'POST',
-                    headers: {
-                        "Content-type":"application/json",
-                        "Authorization": `Bearer ${token}`,
-                    },
-                })
-                const lista = await listData.json()
-                setBillList(lista)
-            } catch (error) {
-                console.log(error)
-                //NOTIFICACAO
-            }
+    async function handleGetBillList() {
+        try {
+            const { token } = JSON.parse(localStorage.getItem('userOrganiza') as string);
+            const listData = await fetch(`${urlBaseAPI}/listafinancas`, {
+                method: 'POST',
+                headers: {
+                    "Content-type":"application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+            })
+            const lista = await listData.json()
+            setBillList(lista)
+        } catch (error) {
+            console.log(error)
+            //NOTIFICACAO
         }
+    }
+    
+    useEffect(() => {
         handleGetBillList()
     },[])
-
+  
     useEffect(()=> {
         async function handleGetCategories() {
             try {
@@ -49,9 +50,8 @@ export default function Income_expenses() {
             setCategories(dataCategories)
             } catch (error) {
                 console.log(error)
-            }
-            
-        }   
+            }       
+        }
         handleGetCategories()
     },[])
 
@@ -59,8 +59,8 @@ export default function Income_expenses() {
         const { name, value } = e.target
         setBill(current => {
             return {
-                [name]: typeof Number(value) === 'number' ? value.replace(',','.'): value,
-                ...current
+                ...current,
+                [name]: typeof Number(value) === 'number' ? value.replace(',','.'): value
             }
         })
     }
@@ -82,19 +82,24 @@ export default function Income_expenses() {
                     body: JSON.stringify(bill)
                 })
                 if(status.status === 201) {
-                    setBill({
-                        data: null,
-                        tipo: null,
-                        subtipo: null,
-                        valor: null,
-                        descricao: null
-                    })
-                    setBillList(current => {
-                        return [
-                            ...current,
-                            bill
-                        ]
-                    })
+                    handleGetBillList()
+                    // const data = new Date(bill.data as Date)
+
+                    // const dia = String(data?.getUTCDate()).padStart(2,'0');
+                    // const mes = String(data?.getMonth()+1).padStart(2,'0');
+                    // const ano = String(data?.getFullYear()).padStart(2,'0');
+
+                    // const billDataFormated = {
+                    //     ...bill,
+                    //     ['data']: `${dia}/${mes}/${ano}`
+                    // }
+                    // setBillList(current => {
+                    //     return [
+                    //         billDataFormated,
+                    //         ...current
+                            
+                    //     ]
+                    // })
                 }
             } catch (err) {
                 console.log(err)

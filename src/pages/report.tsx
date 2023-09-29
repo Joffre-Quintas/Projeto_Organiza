@@ -1,3 +1,5 @@
+import ColumnDiffGrafic from '@/components/ColumnDiffGrafic';
+import PieGrafic from '@/components/PieGrafic';
 import { urlBaseAPI } from '@/data/urlapi';
 import { IBill } from '@/types/TypeBill';
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
@@ -76,22 +78,44 @@ export default function Report() {
     }
 
     const expenseDetails = useMemo(() => {
-        if(filteredList) {
-            const expenses = filteredList.filter( bill => bill.tipo === 'Despesa')
-            console.log(expenses)
+        if (filteredList) {
+            const expenses = filteredList.filter((bill: IBill) => bill.tipo === 'Despesa');
+            
+            const groupedExpenses = expenses.reduce((acc, expense) => {
+            if (!acc[expense.subtipo]) {
+                acc[expense.subtipo] = 0;
+            }
+            acc[expense.subtipo] += expense.valor;
+            return acc;
+            }, {});
+
+            const expensesFormatted = Object.entries(groupedExpenses).map(([subtipo, valor]) => {
+            return [subtipo, valor];
+            });
+
+            return [['Subtipo', 'Valor'], ...expensesFormatted];
         }
-    },[filteredList])
+    }, [filteredList]);
 
-    expenseDetails
+    const incomeDetails = useMemo(() => {
+        if (filteredList) {
+            const incomes = filteredList.filter((bill: IBill) => bill.tipo === 'Receita');
+            
+            const groupedIncomes = incomes.reduce((acc, incomes) => {
+            if (!acc[incomes.subtipo]) {
+                acc[incomes.subtipo] = 0;
+            }
+            acc[incomes.subtipo] += incomes.valor;
+            return acc;
+            }, {});
 
-    const data = [
-        ["Task", "Hours per Day"],
-        ["Work", 11],
-        ["Eat", 2],
-        ["Commute", 2],
-        ["Watch TV", 2],
-        ["Sleep", 7],
-    ];
+            const incomesFormatted = Object.entries(groupedIncomes).map(([subtipo, valor]) => {
+            return [subtipo, valor];
+            });
+
+            return [['Subtipo', 'Valor'], ...incomesFormatted];
+        }
+    }, [filteredList]);
 
     return(
         <div className="flex flex-col items-center">
@@ -137,30 +161,9 @@ export default function Report() {
                     <span className='scale-125'><MdOutlineCleaningServices/></span>
                 </button>
             </div>
-            {filteredList && 
-                <div className='mt-16 w-3/4'>
-                    <h2 className='mb-4 text-lg'>Receitas x Despesas</h2>
-                    <Chart
-                        chartType="ColumnChart"
-                        width="100%"
-                        height="400px"
-                        diffdata={chartColumnDiff}
-                    />
-                </div>
-            }
-            
-            {filteredList && 
-                <div className='mt-16 w-3/4'>
-                    <h2 className='mb-4 text-lg'>Depesas Detalhadas</h2>
-                    <Chart
-                        chartType="PieChart"
-                        data={data}
-                        options={{title: ''}}
-                        width={"100%"}
-                        height={"400px"}
-                    />
-                </div>
-            }
+            {filteredList && <ColumnDiffGrafic data={chartColumnDiff} title='Receitas x Despesas'/>}         
+            {filteredList && <PieGrafic data={expenseDetails} title='Despesas Detalhadas'/>}
+            {filteredList && <PieGrafic data={incomeDetails} title='Receitas Detalhadas'/>}
         </div>
     )
 }
