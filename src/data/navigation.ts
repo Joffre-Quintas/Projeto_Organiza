@@ -16,7 +16,7 @@ const menuItens = [
     {
         "icon": BsGraphUpArrow,
         "name": "Investimentos",
-        "url": "./"
+        "url": "./building"
     },
     {
         "icon": TbReportMoney,
@@ -26,7 +26,7 @@ const menuItens = [
     {
         "icon": BsGear,
         "name": "Configurações",
-        "url": "./"
+        "url": "./building"
     }
 ]
 
