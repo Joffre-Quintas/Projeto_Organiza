@@ -4,7 +4,7 @@ import router from "next/router";
 import { ChangeEvent, FormEvent, useContext, useState } from "react"
 
 export default function Login(){
-    const [loginData, setLoginData] = useState({email: null!, senha: null!})
+    const [loginData, setLoginData] = useState({email: '', senha: ''})
     const { handleLogin } = useContext(UserContext)
 
     function handleLoginData(e:ChangeEvent<HTMLInputElement>) {
@@ -21,7 +21,7 @@ export default function Login(){
 
     async function handleSubmit(e:FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        if(Object.values(loginData).some((value:string) => value.trim() === null)) {
+        if(Object.values(loginData).some((value:string) => value.trim() === '')) {
             alert('Preencha todos os campos!')
         } else {
             try {

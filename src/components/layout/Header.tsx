@@ -16,7 +16,7 @@ export default function Header() {
                 <div className='hidden justify-start items-center text-xl text-lime-500 transition hover:opacity-90 ml-1 md:flex'>
                     <AiOutlineMenu onClick={toggleState}/>
                 </div>
-                <div className="flex justify-start items-center md:ml-16 md:justify-center"><Image src={logo} alt='Logo' width={200}/></div>
+                <div className="flex justify-start items-center md:ml-16 md:justify-center"><Link href='./'><Image src={logo} alt='Logo' width={200}/></Link></div>
                 {!user ?
                     <div className="flex justify-end gap-2 items-center">    
                         <Link href='/login' className='transition hover:scale-110 hover:text-lime-500'>Login</Link>

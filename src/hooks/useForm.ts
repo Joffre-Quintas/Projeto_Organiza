@@ -43,6 +43,9 @@ export default function useForm() {
                         senha: null!
                     })
                     router.push('./')
+                } else {
+                    const errorMessage = await status.text();
+                    alert(`Erro: ${errorMessage}`);
                 }
             }
             catch(error) {
