@@ -1,5 +1,5 @@
 import Image from "next/image"
-import buildingIcon from '../../public/building.svg'
+import buildingIcon from '../../public/images/building.svg'
 
 export default function Building() {
   return(
@@ -9,7 +9,6 @@ export default function Building() {
       <div className="flex justify-center mt-16">
         <Image src={buildingIcon} width={300} alt="buildIcon"/>
       </div>
-
     </div>
     )
 } 

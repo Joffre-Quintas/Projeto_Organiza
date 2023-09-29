@@ -5,7 +5,7 @@ import { useContext} from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { FaRegCircleUser } from 'react-icons/fa6';
 import Image from 'next/image';
-import logo from '../../../public/logo.png'
+import logo from '../../../public/images/logo.png'
 export default function Header() {
     const { toggleState } = useContext(MenuContext)
     const { user } = useContext(UserContext)
