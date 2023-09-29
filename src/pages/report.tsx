@@ -23,11 +23,16 @@ export default function Report() {
             return filteredList.filter((bill: IBill) => bill.tipo === 'Receita').reduce((acumulator: number, current: IBill) => acumulator += current.valor as number, 0)
         }
     },[filteredList])
+
     const expensesValue = useMemo(() => {
         if(filteredList && filteredList.length > 0) {
             return filteredList.filter((bill: IBill) => bill.tipo === 'Despesa').reduce((acumulator: number, current: IBill) => acumulator += current.valor as number, 0)
         }
     },[filteredList])
+
+    const balance = useMemo(() => {
+            return incomesValue-expensesValue
+    },[incomesValue, expensesValue])
 
     const chartColumnDiff = useMemo(() => {
         return {
@@ -163,6 +168,21 @@ export default function Report() {
                     <span className='scale-125'><MdOutlineCleaningServices/></span>
                 </button>
             </div>
+            <div className='flex gap-4 w-3/4 mt-4 text-center text-sm'>
+                <div className='w-1/3 py-4 rounded-md border border-lime-500'>
+                    <h2 className='text-2xl'>Receitas</h2>
+                    <p>{`R$ ${incomesValue}`}</p>
+                </div>
+                <div className='w-1/3 py-4 rounded-md border border-lime-500'>
+                    <h2 className='text-2xl'>Despesas</h2>
+                    <p>{`R$ ${expensesValue}`}</p>
+                </div>
+                <div className='w-1/3 py-4 rounded-md border border-lime-500'>
+                    <h2 className='text-2xl'>Saldo</h2>
+                    <p className={`${balance >= 0 ? 'text-lime-300': 'text-red-500'}`}>{`R$ ${!balance ? 0 : balance }`}</p>
+                </div>
+            </div>
+
             {filteredList && filteredList.length > 0 && <ColumnDiffGrafic data={chartColumnDiff} title='Receitas x Despesas'/>}         
             {filteredList && filteredList.length > 0 && <PieGrafic data={expenseDetails} title='Despesas Detalhadas'/>}
             {filteredList && filteredList.length > 0 && <PieGrafic data={incomeDetails} title='Receitas Detalhadas'/>}
