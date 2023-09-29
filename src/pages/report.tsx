@@ -163,9 +163,9 @@ export default function Report() {
                     <span className='scale-125'><MdOutlineCleaningServices/></span>
                 </button>
             </div>
-            {filteredList && <ColumnDiffGrafic data={chartColumnDiff} title='Receitas x Despesas'/>}         
-            {filteredList && <PieGrafic data={expenseDetails} title='Despesas Detalhadas'/>}
-            {filteredList && <PieGrafic data={incomeDetails} title='Receitas Detalhadas'/>}
+            {filteredList && filteredList.length > 0 && <ColumnDiffGrafic data={chartColumnDiff} title='Receitas x Despesas'/>}         
+            {filteredList && filteredList.length > 0 && <PieGrafic data={expenseDetails} title='Despesas Detalhadas'/>}
+            {filteredList && filteredList.length > 0 && <PieGrafic data={incomeDetails} title='Receitas Detalhadas'/>}
         </div>
     )
 }

@@ -4,7 +4,7 @@ import financasImg from '../../public/images/financasHome.jpeg'
 
 export default function Home() {
   return (
-    <div className="flex flex-col sm:flex-row justify-center items-center gap-8 mt-36">
+    <div className="flex flex-col md:flex-row justify-center items-center gap-8 mt-36">
       <div className="flex flex-col gap-4">
         <h1 className="text-4xl">Bem-Vindo ao <span className="text-lime-500 text">Organiza</span>!</h1>
         <h2 className="text-2xl">O Seu Controle Financeiro Pessoal.</h2>
